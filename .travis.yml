@@ -16,6 +16,6 @@ before_install:
   - pip install http://effbot.org/downloads/Imaging-1.1.6.tar.gz
 install:
   - python bootstrap.py -c test-$PLONE.x.cfg
-  - bin/buildout -Noqc test-$PLONE.x.cfg
+  - bin/buildout -Nqc test-$PLONE.x.cfg
 script:
   - bin/test
