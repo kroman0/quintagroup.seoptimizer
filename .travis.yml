@@ -13,9 +13,11 @@ matrix:
     - python: 2.7
       env: PLONE=4.1
 before_install:
+  - sudo apt-get install axel
   - pip install http://effbot.org/downloads/Imaging-1.1.6.tar.gz
   - mkdir -p downloads/dist
-  - wget -nd -P downloads/dist -rl 1 http://dist.plone.org/release/$PLONE-latest/
+  - axel -o index http://dist.plone.org/release/$PLONE-latest/
+  - cat index | grep "^<a href"|cut -d'"' -f2|while read line; do axel -q -o downloads/dist "http://dist.plone.org/release/4.2-latest/$line" & done
 install:
   - python bootstrap.py -c test-$PLONE.x.cfg
   - bin/buildout -Nqc test-$PLONE.x.cfg
