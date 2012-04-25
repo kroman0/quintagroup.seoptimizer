@@ -14,6 +14,8 @@ matrix:
       env: PLONE=4.1
 before_install:
   - pip install http://effbot.org/downloads/Imaging-1.1.6.tar.gz
+  - mkdir -p downloads/dist
+  - wget -nd -P downloads/dist -rl 1 http://dist.plone.org/release/$PLONE-latest/
 install:
   - python bootstrap.py -c test-$PLONE.x.cfg
   - bin/buildout -Nqc test-$PLONE.x.cfg
