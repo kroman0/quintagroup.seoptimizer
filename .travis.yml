@@ -18,6 +18,6 @@ before_install:
   - wget -qnd -P downloads/dist -rl 1 http://dist.plone.org/release/$PLONE-latest/ &
 install:
   - python bootstrap.py -c test-$PLONE.x.cfg
-  - bin/buildout -Nqc test-$PLONE.x.cfg
+  - bin/buildout -t 5 -Nqc test-$PLONE.x.cfg
 script:
   - bin/test
